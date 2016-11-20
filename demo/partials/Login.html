@@ -9,14 +9,17 @@ function myLogin()
   var form = document.getElementById("loginForm");
   form.reset();
   
+  // Define the options, myOktaOrg is configured in the main.js file and build and OktaAuth client
   var options = {url: myOktaOrg};
   var authClient = new OktaAuth(options);
   
+  //Invoke the sign on process using the username and password collected from the HTML form
   authClient.signIn( {username: userName, password: passWord} )
   .then
   (
     function(transaction)
     {
+	   // Some level of success has occured, flip through the various states to figure out what to do
       switch(transaction.status)
       {
 		case 'LOCKED_OUT':
@@ -31,13 +34,14 @@ function myLogin()
 		case 'MFA_ENROLL':
 		  window.alert("Oh Snap, your admin wants you to use MFA but you haven't enrolled yet. Sorry I am too lazy to support it")
 		  break;		  
-        case 'SUCCESS':
-          console.log(transaction.status)
-          console.log(transaction.sessionToken)
+        case 'SUCCESS':			
+		  //We've encounted a successful authentication, this means we have a sessionToke and we can redirect to okta to establish a security session with them
+		  //We also want to return to our support landing page, build that URL to include with the request
           var goto = window.location.protocol + "//" + window.location.hostname + window.location.pathname + "#/Support"
           authClient.session.setCookieAndRedirect(transaction.sessionToken, goto); // Sets a cookie
           break;
         default:
+		  //There are a number of more complicated authentication scenarios that aren't handled here, let us know what the state is and do nothing
           console.log(transaction.status)
 		  window.alert("I don't know what to do with " + transaction.status)
           //throw 'We cannot handle the ' + transaction.status + ' status';

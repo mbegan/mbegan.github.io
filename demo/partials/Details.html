@@ -38,28 +38,28 @@
 </div>
 
 <script>
-  var goto = window.location.protocol + "//" + window.location.hostname + window.location.pathname + "#/Support"
-  //window.alert(goto)
-  //window.location.replace(goto);
-  //placetogo = document.getElementById('placetogo')
-  //placetogo.innerHTML = goto
   
+  //build a different options object, thsi one will include the registered clientId and redirectUri associated with our OIDC app
   var options = {url: myOktaOrg, clientId: myClientId, redirectUri: myRedirectURL };
-  
   var authClient = new OktaAuth(options);
   
+  // options for the getWithoutPrompt method, this will ask for an id_token only, the testSessionToken is used as we've already established an okta session (implicit)
   var options = {responseType: ['id_token'], sessionToken: 'testSessionToken'};  
   
+  //fetch the idToken
   authClient.token.getWithoutPrompt(options)
           .then
           (
             function(tokenOrTokens)
             {
-              // Manage token or tokens
+              // Grab the token, and specifically the idToken String
               var idToken = tokenOrTokens[0];
               var strIdtoken = idToken.idToken;
+			  //Decode the idToken using the token.decode method
               var decodedToken = authClient.token.decode(strIdtoken);
+			  // for display purposes stringify it
               var strDecoded = JSON.stringify(decodedToken,undefined,4)
+			  //print the stringified decoded token into the textArea
               document.getElementById('decodedToken').innerHTML = strDecoded;
             }
           )
@@ -70,6 +70,7 @@
               // Handle OAuthError
               console.log(err.message);
               window.alert(err.message);
+			  //we are here bcause someone isn't authenticated or isn't assigned to the OIDC app
               window.location.replace("#/Login");
             }
           ); 
