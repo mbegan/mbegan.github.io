@@ -4,7 +4,7 @@
 </div>
 <script>
 var zenUrl = "https://mattegantest.oktapreview.com/home/zendesk/0oa8tvgiuh93NlQ0W0h7/120"
-var myClientId = "asdf"
+var myClientId = "O1b1EbJxxyKMdTdVmMiY"
 
 function myLogin()
 {
@@ -29,12 +29,12 @@ function myLogin()
         case 'SUCCESS':
           console.log(transaction.status)
           console.log(transaction.sessionToken)
-          authClient.session.setCookieAndRedirect(transaction.sessionToken, zenUrl); // Sets a cookie on redirect
-          //authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
+          //authClient.session.setCookieAndRedirect(transaction.sessionToken, zenUrl); // Sets a cookie on redirect
+          authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
           //window.location.replace("#/Support");
 		  
 		  //var options = {responseType: 'id_token', sessionToken: transaction.sessionToken};
-		  //var options = {responseType: 'id_token', sessionToken: 'testSessionToken'};
+		  var options = {responseType: 'id_token', sessionToken: 'testSessionToken'};
 		      
           authClient.token.getWithoutPrompt(options)
           .then
@@ -52,14 +52,14 @@ function myLogin()
             {
               // Handle OAuthError
               console.log(err.message)
-              window.alert(err.message)
+              //window.alert(err.message)
             }
           );          
           //send the user to the Support page
           break;
         default:
           console.log(transaction.status)
-          //throw 'We cannot handle the ' + transaction.status + ' status';
+          throw 'We cannot handle the ' + transaction.status + ' status';
       }
     }
   )
