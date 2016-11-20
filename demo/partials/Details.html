@@ -44,7 +44,7 @@
   var authClient = new OktaAuth(options);
   
   // options for the getWithoutPrompt method, this will ask for an id_token only, the testSessionToken is used as we've already established an okta session (implicit)
-  var options = {responseType: ['id_token','token'],scopes: ['openid', 'profile', 'email', 'address', 'phone'], sessionToken: 'testSessionToken'};  
+  var options = {responseType: ['id_token'],scopes: ['openid', 'profile', 'email', 'address', 'phone'], sessionToken: 'testSessionToken'};  
   
   //fetch the idToken
   authClient.token.getWithoutPrompt(options)
@@ -54,11 +54,7 @@
             {
               // Grab the token, and specifically the idToken String
               var idToken = tokenOrTokens[0];
-			  var accesstoken = tokenOrTokens[1];
               var strIdtoken = idToken.idToken;
-			  var straccesstoken = accesstoken.accesstoken
-			  console.log(straccesstoken)
-			  //console.log(strIdtoken)
 			  //Decode the idToken using the token.decode method
               var decodedToken = authClient.token.decode(strIdtoken);
 			  // for display purposes stringify it
