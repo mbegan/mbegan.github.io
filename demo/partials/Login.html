@@ -29,10 +29,11 @@ function myLogin()
       switch(transaction.status)
       {
         case 'SUCCESS':
-          //authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
           console.log(transaction.status)
           console.log(transaction.sessionToken)
-          //throw 'We Encountered A ' + transaction.status + ' status';
+          authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
+          window.location.replace("./Support.html");
+          //send the user to the Support page
           break;
         default:
           console.log(transaction.status)
@@ -45,9 +46,10 @@ function myLogin()
   (
     function(err)
     {
-		console.log(err.message)
-		console.log(err.errorCode)
-		//console.error(err);
+		  console.log(err.message)
+		  console.log(err.errorCode)
+		  window.alert(err.message);
+		  //console.error(err);
     }
   );
 }
