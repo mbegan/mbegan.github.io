@@ -32,7 +32,7 @@ function myLogin()
           console.log(transaction.status)
           console.log(transaction.sessionToken)
           authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
-          window.location.replace("./Support.html");
+          window.location.replace("./#/Support");
           //send the user to the Support page
           break;
         default:
