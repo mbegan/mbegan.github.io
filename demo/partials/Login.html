@@ -8,6 +8,8 @@ function myLogin()
 {
   var userName = document.getElementById("username").value;
   var passWord = document.getElementById("password").value;
+  var form = document.getElementById("loginForm");
+  form.reset();
   var authClient = new OktaAuth({url: 'https://mattegantest.oktapreview.com'});
   console.log("Username: " + userName)
   console.log("Password: " + passWord)
@@ -57,7 +59,7 @@ function myLogin()
         <div class="col-lg-8 col-md-8">
             <h3>Let's Login!</h3>
 
-            <form role="form" onsubmit="myLogin()">
+            <form role="form" onsubmit="myLogin()" id="loginForm">
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="username">username</label>
