@@ -17,20 +17,63 @@
     </div>
 	
 	<div class="container">
-
     <div class="row well">
         <div class="col-lg-8 col-md-8">
-	
-			<a id="placetogo" class="active" href="#"> A place to goto </a>
-
+          <a href="#/Support"> Support </a>
         </div>
     </div>
+  </div>
+  
+	<div class="container">
+    <div class="row well">
+        <div class="col-lg-8 col-md-8">
+          <a href="#/Support"> Support </a>
+        </div>
+    </div>
+  </div>  
+
 </div>
 
 <script>
   var goto = window.location.protocol + "//" + window.location.hostname + window.location.pathname + "#/Support"
-  window.alert(goto)
+  //window.alert(goto)
   //window.location.replace(goto);
   placetogo = document.getElementById('placetogo')
   placetogo.innerHTML = goto
-</script>
+  var zenUrl = "https://mattegantest.oktapreview.com/home/zendesk/0oa8tvgiuh93NlQ0W0h7/120";
+  var myClientId = "dSQSiGg1lEvo9f2c3iDc";
+  var myRedirectURL = "https://run.plnkr.co/IVxBA176WbzmfkSX";
+  
+  var options = {url: 'https://mattegantest.oktapreview.com', clientId: myClientId, redirectUri: myRedirectURL };
+  
+  var authClient = new OktaAuth(options);
+  
+  var options = {responseType: ['id_token'], sessionToken: 'testSessionToken'};  
+  
+  authClient.token.getWithoutPrompt(options)
+          .then
+          (
+            function(tokenOrTokens)
+            {
+              // Manage token or tokens
+              var idToken = tokenOrTokens[0];
+              //var accessToken = tokenOrTokens[1];
+              //console.log(tokenOrTokens);
+              //console.log(idToken);
+              var strIdtoken = idToken.idToken;
+              //console.log(strIdtoken);
+              var decodedToken = authClient.token.decode(strIdtoken);
+              console.log(decodedToken);
+              //window.alert(idToken.idToken)
+            }
+          )
+          .catch
+          (
+            function(err)
+            {
+              // Handle OAuthError
+              console.log(err.message);
+              //window.alert(err.message)
+            }
+          ); 
+</script>  
