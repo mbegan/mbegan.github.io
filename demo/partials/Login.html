@@ -3,38 +3,59 @@
 <br/>
 </div>
 <script>
-
 var zenUrl = "https://mattegantest.oktapreview.com/home/zendesk/0oa8tvgiuh93NlQ0W0h7/120"
+var myClientId = "asdf"
+
 function myLogin()
 {
   var userName = document.getElementById("username").value;
   var passWord = document.getElementById("password").value;
   var form = document.getElementById("loginForm");
   form.reset();
-  var authClient = new OktaAuth({url: 'https://mattegantest.oktapreview.com'});
-  console.log("Username: " + userName)
-  console.log("Password: " + passWord)
-  authClient.signIn
-  (
-    {
-      username: userName,
-      password: passWord
-    }
-  )
+  var options = {url: 'https://mattegantest.oktapreview.com', clientId: myClientId};
+  var authClient = new OktaAuth(options);
   
+  //console.log("Username: " + userName)
+  //console.log("Password: " + passWord)
+  
+  authClient.signIn( {username: userName, password: passWord} )
   .then
   (
     function(transaction)
     {
-    
       switch(transaction.status)
       {
         case 'SUCCESS':
           console.log(transaction.status)
           console.log(transaction.sessionToken)
-          authClient.session.setCookieAndRedirect(transaction.sessionToken, zenUrl); // Sets a cookie on redirect
-          window.location.replace("./#/Support");
+          //authClient.session.setCookieAndRedirect(transaction.sessionToken, zenUrl); // Sets a cookie on redirect
+          authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
+          //window.location.replace("#/Support");
+		  
+		      //var options = {responseType: 'id_token', sessionToken: transaction.sessionToken};
+		      var options = {responseType: 'id_token', sessionToken: 'testSessionToken'};
+		      
+          authClient.token.getWithoutPrompt(options)
+          .then
+          (
+            function(tokenOrTokens)
+            {
+              // Manage token or tokens
+              console.log(tokenOrTokens.id_token)
+              window.alert(tokenOrTokens.id_token)
+            }
+          )
+          .catch
+          (
+            function(err)
+            {
+              // Handle OAuthError
+              console.log(err.message)
+              window.alert(err.message)
+            }
+          );          
           //send the user to the Support page
+          window.location.replace("#/Support");
           break;
         default:
           console.log(transaction.status)
@@ -42,14 +63,13 @@ function myLogin()
       }
     }
   )
-  
   .fail // The password wasn't good or something else went poorly
   (
     function(err)
     {
 		  console.log(err.message)
 		  console.log(err.errorCode)
-		  window.alert(err.message);
+		  //window.alert(err.message);
 		  //console.error(err);
     }
   );
