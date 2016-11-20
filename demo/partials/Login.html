@@ -28,12 +28,12 @@ function myLogin()
         case 'SUCCESS':
           console.log(transaction.status)
           console.log(transaction.sessionToken)
-          //authClient.session.setCookieAndRedirect(transaction.sessionToken, zenUrl); // Sets a cookie on redirect
+          authClient.session.setCookieAndRedirect(transaction.sessionToken, zenUrl); // Sets a cookie on redirect
           authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
           //window.location.replace("#/Support");
 		  
-		      //var options = {responseType: 'id_token', sessionToken: transaction.sessionToken};
-		      var options = {responseType: 'id_token', sessionToken: 'testSessionToken'};
+		  //var options = {responseType: 'id_token', sessionToken: transaction.sessionToken};
+		  //var options = {responseType: 'id_token', sessionToken: 'testSessionToken'};
 		      
           authClient.token.getWithoutPrompt(options)
           .then
@@ -55,7 +55,6 @@ function myLogin()
             }
           );          
           //send the user to the Support page
-          window.location.replace("#/Support");
           break;
         default:
           console.log(transaction.status)

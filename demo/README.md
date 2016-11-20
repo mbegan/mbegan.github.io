@@ -1,8 +1,8 @@
-AngularJS Tutorial 1
+Matt Egan TEst
 ====================
 
-author: [Nick Kaye](http://www.nickkaye.com)
+author: [Matt Egan](https://github.com/mbegan)
 
-**NOTE:  We’re referencing all of our vendor dependencies (e.g. Bootstrap, jQuery, Angular) at outside URLs.   Therefore, it is necessary to host our site while we’re working on it.  Be sure we are viewing it in a browser with http:// -- not file://**
+**NOTE: login leveraging okta_auth_sdk, establish okta session, exchange session token for id_token, decode token or redirect to SaaS app ZenDesk
 
-View the [live demo](http://airpair.github.io/demos/2014/09/T0021-airpair-angularjs-tutorial).
+View the [live demo](https://mbegan.github.io/demo/#/)
