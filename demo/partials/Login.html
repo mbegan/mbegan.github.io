@@ -39,11 +39,13 @@ function myLogin()
     }
   )
   
-  .fail
+  .fail // The password wasn't good or something else went poorly
   (
     function(err)
     {
-      console.error(err);
+		console.log(err.message)
+		console.log(err.errorCode)
+		//console.error(err);
     }
   );
 }
@@ -55,7 +57,7 @@ function myLogin()
         <div class="col-lg-8 col-md-8">
             <h3>Let's Login!</h3>
 
-            <form role="form" method="POST" action="#">
+            <form role="form" onsubmit="myLogin()">
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label for="username">username</label>
@@ -67,7 +69,7 @@ function myLogin()
                     </div>
                     <div class="form-group col-lg-12">
                         <input type="hidden" name="save" value="contact">
-                        <input type="button" onclick="myLogin()" value="Login">
+                        <input type="submit" name="login" value="login">
                     </div>
                 </div>
             </form>
