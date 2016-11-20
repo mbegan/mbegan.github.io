@@ -48,6 +48,7 @@ app.controller('PageCtrl', function (/* $scope, $location, $http */) {
   })
 });
 
+//Configuration variables that we'll use through the app
 var zenUrl = "https://mattegantest.oktapreview.com/home/zendesk/0oa8tvgiuh93NlQ0W0h7/120";
 var myClientId = "dSQSiGg1lEvo9f2c3iDc";
 var myRedirectURL = "https://mbegan.github.io/demo";

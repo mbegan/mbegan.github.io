@@ -3,6 +3,7 @@
 
 function myLogin()
 {
+  //Collect the username and Password from the login form submision	
   var userName = document.getElementById("username").value;
   var passWord = document.getElementById("password").value;
   var form = document.getElementById("loginForm");
@@ -18,16 +19,25 @@ function myLogin()
     {
       switch(transaction.status)
       {
+		case 'LOCKED_OUT':
+		  window.alert("You are locked out")
+		  break;
+		case 'PASSWORD_EXPIRED':
+		  window.alert("Your password expired, if I was nice i'd offer a way to resolve this issue")
+		  break;
+		case 'MFA_REQUIRED':
+		  window.alert("Oh Snap, your admin wants you to use MFA and i'm too lazy to support it")
+		  break;		  
         case 'SUCCESS':
           console.log(transaction.status)
           console.log(transaction.sessionToken)
-          //authClient.session.setCookieAndRedirect(transaction.sessionToken, zenUrl); // Sets a cookie and redirects
           var goto = window.location.protocol + "//" + window.location.hostname + window.location.pathname + "#/Support"
           authClient.session.setCookieAndRedirect(transaction.sessionToken, goto); // Sets a cookie
           break;
         default:
           console.log(transaction.status)
-          throw 'We cannot handle the ' + transaction.status + ' status';
+		  window.alert("I don't know what to do with " + transaction.status)
+          //throw 'We cannot handle the ' + transaction.status + ' status';
       }
     }
   )
