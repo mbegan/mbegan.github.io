@@ -30,16 +30,16 @@
           Info:
         </div>
         <div class="col-lg-8 col-md-8">
-          Sub:<textarea id="tokSub" cols=20 rows=1></textarea>
+          Sub:<textarea id="tokSub" cols=60 rows=2></textarea>
         </div>
 		<div class="col-lg-8 col-md-8">
-          name:<textarea id="tokName" cols=20 rows=1></textarea>
+          name:<textarea id="tokName" cols=60 rows=2></textarea>
         </div>
 		<div class="col-lg-8 col-md-8">
-          email:<textarea id="tokEmail" cols=20 rows=1></textarea>
+          email:<textarea id="tokEmail" cols=60 rows=2></textarea>
         </div>
 		<div class="col-lg-8 col-md-8">
-          Issuer:<textarea id="tokIss" cols=20 rows=1></textarea>
+          Issuer:<textarea id="tokIss" cols=60 rows=2></textarea>
         </div>
     </div>
   </div>  
@@ -80,11 +80,17 @@
               var decodedToken = authClient.token.decode(strIdtoken);
 			  var payLoad = decodedToken.payload;
 			  var iss = payLoad.iss
+			  var name = payLoad.name
+			  var sub = payLoad.sub
+			  var email = payLoad.email
 			  // for display purposes stringify it
               var strDecoded = JSON.stringify(decodedToken,undefined,4)
 			  //print the stringified decoded token into the textArea
               document.getElementById('decodedToken').innerHTML = strDecoded;
 			  document.getElementById('tokIss').innerHTML = iss;
+			  document.getElementById('tokName').innerHTML = name;
+			  document.getElementById('tokEmail').innerHTML = email;
+			  document.getElementById('tokSub').innerHTML = sub;
             }
           )
           .catch
