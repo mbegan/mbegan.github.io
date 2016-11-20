@@ -2,6 +2,52 @@
 <div>
 <br/>
 </div>
+<script>
+
+function myLogin()
+{
+  var userName = document.getElementById("username").value;
+  var passWord = document.getElementById("password").value;
+  var authClient = new OktaAuth({url: 'https://mattegantest.oktapreview.com'});
+  console.log("Username: " + userName)
+  console.log("Password: " + passWord)
+  authClient.signIn
+  (
+    {
+      username: userName,
+      password: passWord
+    }
+  )
+  
+  .then
+  (
+    function(transaction)
+    {
+    
+      switch(transaction.status)
+      {
+        case 'SUCCESS':
+          //authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
+          console.log(transaction.status)
+          console.log(transaction.sessionToken)
+          //throw 'We Encountered A ' + transaction.status + ' status';
+          break;
+        default:
+          console.log(transaction.status)
+          //throw 'We cannot handle the ' + transaction.status + ' status';
+      }
+    }
+  )
+  
+  .fail
+  (
+    function(err)
+    {
+      console.error(err);
+    }
+  );
+}
+</script>
 
 <div class="container">
 
@@ -16,12 +62,12 @@
                         <input type="text" name="username" class="form-control" id="username">
                     </div>
                     <div class="form-group col-lg-4">
-                        <label for="password">Email Address</label>
+                        <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" id="password">
                     </div>
                     <div class="form-group col-lg-12">
                         <input type="hidden" name="save" value="contact">
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <input type="button" onclick="myLogin()" value="Login">
                     </div>
                 </div>
             </form>
