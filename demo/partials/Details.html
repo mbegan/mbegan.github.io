@@ -44,6 +44,7 @@
   var authClient = new OktaAuth(options);
   
   // options for the getWithoutPrompt method, this will ask for an id_token only, the testSessionToken is used as we've already established an okta session (implicit)
+  //Inclusive of the additional scopes we want to see
   var options = {responseType: ['id_token'],scopes: ['openid', 'profile', 'email', 'address', 'phone'], sessionToken: 'testSessionToken'};  
   
   //fetch the idToken
