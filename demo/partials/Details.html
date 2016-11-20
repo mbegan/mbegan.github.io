@@ -55,6 +55,7 @@
               // Grab the token, and specifically the idToken String
               var idToken = tokenOrTokens[0];
               var strIdtoken = idToken.idToken;
+			  console.log(strIdtoken)
 			  //Decode the idToken using the token.decode method
               var decodedToken = authClient.token.decode(strIdtoken);
 			  // for display purposes stringify it
