@@ -24,10 +24,11 @@ function myLogin()
           console.log(transaction.status)
           console.log(transaction.sessionToken)
           //authClient.session.setCookieAndRedirect(transaction.sessionToken, zenUrl); // Sets a cookie and redirects
-          authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie
+          var goto = window.location.protocol + "//" + window.location.hostname + window.location.pathname + "#/Support"
+          authClient.session.setCookieAndRedirect(transaction.sessionToken, goto); // Sets a cookie
 		      
           //send the user to the Support page
-		  window.location.replace("#/Support");
+		      //window.location.replace("#/Support");
           break;
         default:
           console.log(transaction.status)
@@ -41,7 +42,7 @@ function myLogin()
     {
 		  console.log(err.message)
 		  console.log(err.errorCode)
-		  //window.alert(err.message);
+		  window.alert(err.message);
 		  //console.error(err);
     }
   );
