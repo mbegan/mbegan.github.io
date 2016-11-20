@@ -27,6 +27,9 @@ function myLogin()
 		  break;
 		case 'MFA_REQUIRED':
 		  window.alert("Oh Snap, your admin wants you to use MFA and i'm too lazy to support it")
+		  break;
+		case 'MFA_ENROLL':
+		  window.alert("Oh Snap, your admin wants you to use MFA but you haven't enrolled yet. Sorry I am too lazy to support it")
 		  break;		  
         case 'SUCCESS':
           console.log(transaction.status)
