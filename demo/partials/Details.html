@@ -78,10 +78,13 @@
               var strIdtoken = idToken.idToken;
 			  //Decode the idToken using the token.decode method
               var decodedToken = authClient.token.decode(strIdtoken);
+			  var payLoad = decodedToken.payload;
+			  var iss = payLoad.iss
 			  // for display purposes stringify it
               var strDecoded = JSON.stringify(decodedToken,undefined,4)
 			  //print the stringified decoded token into the textArea
               document.getElementById('decodedToken').innerHTML = strDecoded;
+			  document.getElementById('tokIss').innerHTML = iss;
             }
           )
           .catch
