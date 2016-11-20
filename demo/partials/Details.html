@@ -27,7 +27,10 @@
 	<div class="container">
     <div class="row well">
         <div class="col-lg-8 col-md-8">
-          <a href="#/Support"> Support </a>
+          Information:
+        </div>
+        <div class="col-lg-8 col-md-8">
+          <textarea id="myTextArea" cols=120 rows=60></textarea>
         </div>
     </div>
   </div>  
@@ -61,7 +64,9 @@
               //console.log(strIdtoken);
               var decodedToken = authClient.token.decode(strIdtoken);
               console.log(decodedToken);
-              //window.alert(idToken.idToken)
+              var strDecoded = JSON.stringify(decodedToken,undefined,4)
+              //window.alert(strDecoded)
+              document.getElementById('myTextArea').innerHTML = strDecoded;
             }
           )
           .catch
@@ -70,7 +75,8 @@
             {
               // Handle OAuthError
               console.log(err.message);
-              //window.alert(err.message)
+              window.alert(err.message);
+              window.location.replace("#/Login");
             }
           ); 
 </script>  
