@@ -13,6 +13,7 @@ function myLogin()
   var form = document.getElementById("loginForm");
   form.reset();
   var options = {url: 'https://mattegantest.oktapreview.com', clientId: myClientId};
+  var options = {url: 'https://mattegantest.oktapreview.com'};
   var authClient = new OktaAuth(options);
   
   //console.log("Username: " + userName)
@@ -29,7 +30,7 @@ function myLogin()
           console.log(transaction.status)
           console.log(transaction.sessionToken)
           authClient.session.setCookieAndRedirect(transaction.sessionToken, zenUrl); // Sets a cookie on redirect
-          authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
+          //authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
           //window.location.replace("#/Support");
 		  
 		  //var options = {responseType: 'id_token', sessionToken: transaction.sessionToken};
